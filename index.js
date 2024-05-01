@@ -4,6 +4,18 @@ const mongoose = require('mongoose');
 const uri = "mongodb+srv://chihimed:sFhugK3DNkLRVr5N@api-test.8o7qski.mongodb.net/API-test?retryWrites=true&w=majority&appName=API-TEST";
 const productRoute = require('./routes/product.route')
 
+//////////////////////////////////
+// permettre l'accès à l'API (CORS)
+app.use((req, res, next) => {
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader('Access-Control-Allow-Headers', 'X-CSRF-Token,Origin, X-Requested-With, Content, Accept, Accept-Version, Content-Length, Content-MD5, Content-Type, Date, X-Api-Version, Authorization');
+    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, PATCH, OPTIONS');
+    next();
+  });
+
+
 //middleware
 app.use(express.json())
 app.use(express.urlencoded({extended: false}))
