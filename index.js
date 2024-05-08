@@ -3,6 +3,7 @@ const app = express()
 const mongoose = require('mongoose');
 const uri = "mongodb+srv://chihimed:sFhugK3DNkLRVr5N@api-test.8o7qski.mongodb.net/API-test?retryWrites=true&w=majority&appName=API-TEST";
 const productRoute = require('./routes/product.route')
+const Store = require('../models/store.model.js')
 
 //////////////////////////////////
 // permettre l'accès à l'API (CORS)
@@ -31,6 +32,24 @@ mongoose.connect(uri).then(()=>{
 
 //routes
 app.use('/products', productRoute)
+
+app.get('/stores', async (req, res)=> {
+    try {
+        const stores = await Store.find({}) 
+        res.status(200, res.send(stores))
+     } catch (error) {
+         res.status(500).json({message: error.message})
+     }
+})
+
+app.post('/stores', async (req, res)=> {
+    try {
+        const stores = await Store.create(req.body) 
+        res.status(200, res.send(stores))
+     } catch (error) {
+         res.status(500).json({message: error.message})
+     }
+})
 
 
 app.get('/', (req, res) => {
