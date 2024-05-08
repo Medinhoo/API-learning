@@ -4,6 +4,8 @@ const mongoose = require('mongoose');
 const uri = "mongodb+srv://chihimed:sFhugK3DNkLRVr5N@api-test.8o7qski.mongodb.net/API-test?retryWrites=true&w=majority&appName=API-TEST";
 const productRoute = require('./routes/product.route')
 const Store = require('./models/store.model.js');
+const User = require('./models/user.model.js');
+
 
 //////////////////////////////////
 // permettre l'accès à l'API (CORS)
@@ -50,6 +52,49 @@ app.post('/stores', async (req, res)=> {
          res.status(500).json({message: error.message})
      }
 })
+
+
+// Vérification ysername et password du user
+app.post('/login', async (req, res)=> {
+    const { username, password } = req.body; // Récupérer le nom d'utilisateur et le mot de passe depuis le corps de la requête
+
+    try {
+        // Recherchez l'utilisateur correspondant au nom d'utilisateur fourni
+        const user = await User.findOne({ username });
+
+        if (!user) {
+            return res.status(404).json({ message: 'Utilisateur non trouvé' });
+        }
+
+        // Vérifiez si le mot de passe fourni correspond au mot de passe stocké pour cet utilisateur
+        if (password !== user.password) {
+            return res.status(401).json({ message: 'Mot de passe incorrect' });
+        }
+
+        // Authentification réussie
+        res.status(200).json({ message: 'Connexion réussie' });
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
+
+// Creer un user 
+app.post('/users', async (req, res) => {
+    const { username, password } = req.body; // Récupérer les données du nouvel utilisateur depuis le corps de la requête
+
+    try {
+        // Créer un nouvel utilisateur avec les données fournies
+        const newUser = await User.create({ username, password });
+
+        // Renvoyer une réponse indiquant que l'utilisateur a été créé avec succès
+        res.status(201).json(newUser);
+    } catch (error) {
+        // En cas d'erreur lors de la création de l'utilisateur, renvoyer un message d'erreur
+        res.status(500).json({ message: error.message });
+    }
+});
+
+
 
 
 app.get('/', (req, res) => {
