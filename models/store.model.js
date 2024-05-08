@@ -1,6 +1,6 @@
-import { Schema, model } from 'mongoose';
+const mongoose = require('mongoose')
 
-const StoreSchema = Schema(
+const StoreSchema = mongoose.Schema(
     {
         name: {
             type: String,
@@ -13,6 +13,6 @@ const StoreSchema = Schema(
 
 );
 
-const Store = model("Store", StoreSchema);
+const Store = mongoose.model("Store", StoreSchema);
 
 export default Store;
