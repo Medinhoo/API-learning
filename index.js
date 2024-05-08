@@ -3,7 +3,7 @@ const app = express()
 const mongoose = require('mongoose');
 const uri = "mongodb+srv://chihimed:sFhugK3DNkLRVr5N@api-test.8o7qski.mongodb.net/API-test?retryWrites=true&w=majority&appName=API-TEST";
 const productRoute = require('./routes/product.route')
-const Store = require('../models/store.model.js')
+const Store = require('./models/store.model.js');
 
 //////////////////////////////////
 // permettre l'accès à l'API (CORS)
