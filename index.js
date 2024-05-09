@@ -72,7 +72,7 @@ app.post('/login', async (req, res)=> {
         }
 
         // Authentification réussie
-        res.status(200).json({ message: 'Connexion réussie' });
+        res.status(200).json(user);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
