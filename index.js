@@ -80,11 +80,11 @@ app.post('/login', async (req, res)=> {
 
 // Creer un user 
 app.post('/users', async (req, res) => {
-    const { username, password } = req.body; // Récupérer les données du nouvel utilisateur depuis le corps de la requête
+    const { username, password,groceryLists} = req.body; // Récupérer les données du nouvel utilisateur depuis le corps de la requête
 
     try {
         // Créer un nouvel utilisateur avec les données fournies
-        const newUser = await User.create({ username, password });
+        const newUser = await User.create({ username, password, groceryLists});
 
         // Renvoyer une réponse indiquant que l'utilisateur a été créé avec succès
         res.status(201).json(newUser);
