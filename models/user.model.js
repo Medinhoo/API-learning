@@ -5,7 +5,7 @@ const UserSchema = mongoose.Schema(
         id: {
             type: Number,
         },
-        
+
         username: {
             type: String,
             required: [true, "please enter a username"],
@@ -16,7 +16,6 @@ const UserSchema = mongoose.Schema(
         },
         groceryLists: [{
             type: mongoose.Schema.Types.ObjectId,
-            ref: 'GroceryList'
         }],
     },
     {

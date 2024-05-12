@@ -80,11 +80,11 @@ app.post('/login', async (req, res)=> {
 
 // Creer un user 
 app.post('/users', async (req, res) => {
-    const { username, password,groceryLists} = req.body; // Récupérer les données du nouvel utilisateur depuis le corps de la requête
+    const { username, password, groceryLists } = req.body; // Récupérer les données du nouvel utilisateur depuis le corps de la requête
 
     try {
-        // Créer un nouvel utilisateur avec les données fournies
-        const newUser = await User.create({ username, password, groceryLists});
+        // Créer un nouvel utilisateur avec les données fournies, y compris les groceryLists
+        const newUser = await User.create({ username, password, groceryLists });
 
         // Renvoyer une réponse indiquant que l'utilisateur a été créé avec succès
         res.status(201).json(newUser);
@@ -93,6 +93,7 @@ app.post('/users', async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 });
+
 
 //récupérer tous les users
 app.get('/users', async (req, res)=> {
