@@ -29,7 +29,7 @@ const UserSchema = mongoose.Schema(
               type: Number,
               required: [true, "please enter a id"],
             },
-            name: {
+            productName: {
               type: String,
               required: [true, "please enter a name"],
             },
