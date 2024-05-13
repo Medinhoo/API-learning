@@ -25,7 +25,7 @@ const UserSchema = mongoose.Schema(
 
         products: [
           {
-            id: {
+            _id: {
               type: Number,
               required: [true, "please enter a id"],
             },
